@@ -1,0 +1,28 @@
+﻿@model  RS1_Ispit_asp.net_core.ViewModels.OdrzanaNastavaUrediStavkuVM
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+    <form id="forma">
+        <input asp-for="Id" hidden/>
+        <label>Učenik:</label><label>@Model.Ucenik</label><br />
+        <label>Bodovi:</label><input asp-for="Bodovi" type="text"/><br />
+        <input type="submit" value="Snimi"/>
+    </form>
+
+
+<script>
+    $(document).ready(() => {
+        $(document).on('submit', '#forma', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "/OdrzanaNastava/UrediStavku",
+                method: "POST",
+                data: $("#forma").serialize(),
+                success: (data) => {
+                    $("#stavke").html(data);
+                }
+            });
+        });
+    });
+</script>

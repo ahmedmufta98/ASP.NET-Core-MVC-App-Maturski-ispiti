@@ -1,0 +1,26 @@
+﻿@model  List<RS1_Ispit_asp.net_core.ViewModels.OdrzanaNastavaIndexVM>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <thead>
+        <tr style="background-color:gray">
+            <th>Škola</th>
+            <th>Nastavnik</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Skola</td>
+                <td>@item.Nastavnik</td>
+                <td><a href="/OdrzanaNastava/Odaberi?id=@item.NastavnikId">Odaberi</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

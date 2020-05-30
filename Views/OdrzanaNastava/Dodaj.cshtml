@@ -1,0 +1,19 @@
+﻿@model RS1_Ispit_asp.net_core.ViewModels.OdrzanaNastavaDodajVM
+@{
+    ViewData["Title"] = "Dodaj";
+}
+
+<h2>Dodaj ispit</h2>
+
+<form action="/OdrzanaNastava/Dodaj" method="post">
+    <input asp-for="NastavnikId" hidden/>
+    <input asp-for="OdjeljenjeId" hidden/>
+    <label>Škola:</label>
+    <select asp-for="SkolaId" asp-items="Model.Skole"></select><br />
+    <label>Nastavnik:</label><label>@Model.Nastavnik</label><br />
+    <label>Datum ispita:</label><input asp-for="Datum"/><br />
+    <label>Predmet:</label>
+    <select asp-for="PredmetId" asp-items="Model.Predmeti"></select><br />
+    <label>Školska godina</label><label>@Model.SkolskaGodina</label>
+    <input type="submit" value="Snimi"/>
+</form>

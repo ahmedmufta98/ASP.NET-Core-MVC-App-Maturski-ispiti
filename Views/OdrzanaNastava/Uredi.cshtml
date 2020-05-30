@@ -1,0 +1,26 @@
+﻿@model  RS1_Ispit_asp.net_core.ViewModels.OdrzanaNastavaUrediVM
+@{
+    ViewData["Title"] = "Uredi";
+}
+
+<h2>Uredi</h2>
+
+<form action="/OdrzanaNastava/Uredi" method="post">
+    <input asp-for="Id" hidden/>
+    <input asp-for="NastavnikId" hidden/>
+    <label>Datum ispita:</label><input asp-for="Datum" readonly/><br />
+    <label>Predmet:</label><input asp-for="Predmet" type="text" readonly/><br />
+    <label>Napomena:</label><input type="text" asp-for="Napomena"/><br />
+    <input type="submit" value="Uredi"/>
+</form>
+<br />
+<div id="stavke"></div>
+
+
+<script>
+    $(document).ready(() => {
+        $.get("/OdrzanaNastava/ListaStavke?id=@Model.Id", function (data) {
+            $("#stavke").html(data);
+        });
+    });
+</script>

@@ -1,0 +1,31 @@
+﻿@model  RS1_Ispit_asp.net_core.ViewModels.OdrzanaNastavaOdaberiVM
+@{
+    ViewData["Title"] = "Odaberi";
+}
+
+<h2>Ispiti</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Datum ispita</th>
+            <th>Škola</th>
+            <th>Predmet</th>
+            <th>Nisu pristupili</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Rows)
+        {
+            <tr>
+                <td>@item.Datum</td>
+                <td>@item.Skola</td>
+                <td>@item.Predmet</td>
+                <td>@item.NisuPristupiliUcenici.Aggregate((myString,myString2)=>myString+","+myString2)</td>
+                <td><a href="/OdrzanaNastava/Uredi?id=@item.Id">Uredi</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a class="btn btn-default" href="/OdrzanaNastava/Dodaj?id=@Model.NastavnikId">Dodaj</a>

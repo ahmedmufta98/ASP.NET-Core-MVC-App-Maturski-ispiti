@@ -1,0 +1,64 @@
+﻿@model  RS1_Ispit_asp.net_core.ViewModels.OdrzanaNastavaListaStavkeVM
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+    <table class="table-bordered">
+        <thead>
+            <tr>
+                <th>Učenik</th>
+                <th>Prosjek</th>
+                <th>Pristupio</th>
+                <th>Bodovi</th>
+                <th>Akcija</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.MatStavke)
+            {
+            <tr>
+                <td>@item.Ucenik</td>
+                <td>@item.Prosjek</td>
+                @if (item.Pristupio == false)
+                {
+                    <td><a class="btn btn-danger odsutan" atributO="@item.StavkaId">NE</a></td>
+                    <td>x</td>
+                    <td></td>
+                }
+                else
+                {
+                    <td><a class="btn btn-primary prisutan" atributP="@item.StavkaId">DA</a></td>
+                    <td>@item.Bodovi</td>
+                    <td><a class="uredi" atributU="@item.StavkaId">Uredi</a></td>
+                }
+
+            </tr>
+            }
+        </tbody>
+    </table>
+
+<script>
+    $(document).ready(() => {
+        $(document).on('click', '.odsutan', function () {
+            var btn = $(this);
+            var idZaUpdate = btn.attr("atributO");
+            $.get("/OdrzanaNastava/UcenikJePrisutan?id=" + idZaUpdate, function (data) {
+                $("#stavke").html(data);
+            });
+        });
+        $(document).on('click', '.prisutan', function () {
+            var btn = $(this);
+            var idZaUpdate = btn.attr("atributP");
+            $.get("/OdrzanaNastava/UcenikJeOdsutan?id=" + idZaUpdate, function (data) {
+                $("#stavke").html(data);
+            });
+        });
+        $(document).on('click', '.uredi', function () {
+            var btn = $(this);
+            var idUredi = btn.attr("atributU");
+            $.get("/OdrzanaNastava/UrediStavku?id=" + idUredi, function (data) {
+                $("#stavke").html(data);
+            });
+        });
+    });
+</script>
